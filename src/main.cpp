@@ -111,11 +111,10 @@ void fetchData()
 
           for (int i = 0; i <= 1; i++)
           {
-            bool hasMatch = false;
             // 通过 ID 进行逻辑判断
             if (homeId == TARGET_IDs[i] || awayId == TARGET_IDs[i])
             {
-              hasMatch = true;
+              hasMatch[i] = true;
               static String homeName = getTeamNameById(homeId);
               static String awayName = getTeamNameById(awayId);
               static int homeScore = item["homeScore"];
