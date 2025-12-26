@@ -88,6 +88,9 @@ void fetchData()
   HTTPClient http;
   String url = "http://api.sports.163.com/api/cba/v2/schedule/getByMatchDay?firstDay=" + String(lineBuf) + "&lastDay=" + String(lineBuf);
 
+  http.setUserAgent("Mozilla/5.0 (X11; Linux x86_64; rv:146.0) Gecko/20100101 Firefox/146.0");
+  http.addHeader("Referer", "https://cba.sports.163.com/", false, true);
+
   if (http.begin(client, url))
   {
     int httpCode = http.GET();
