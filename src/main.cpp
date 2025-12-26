@@ -17,6 +17,7 @@ extern "C"
   // Make sure this file doesn't end with an empty line.
   extern const char WIFI_PASS[] asm("_binary_wifipass_txt_start");
 }
+bool hasMatch[2] = {false, false};
 // 需要筛选的 ID
 const int TARGET_IDs[2] = {
     10726, // 北京
@@ -100,6 +101,7 @@ void fetchData()
 
       if (!error)
       {
+        hasMatch[0] = hasMatch[1] = false;
         JsonArray items = doc["data"]["items"].as<JsonArray>();
 
         for (JsonObject item : items)
@@ -125,11 +127,14 @@ void fetchData()
                        homeName.c_str(), homeScore, awayScore, awayName.c_str());
               Display::display_replace_line(i, lineBuf);
             }
+          }
+        }
 
-            if (!hasMatch)
-            {
-              Display::display_replace_line(i, "                   ");
-            }
+        for (int i = 0; i <= 1; i++)
+        {
+          if (!hasMatch[i])
+          {
+            Display::display_replace_line(i, "                   ");
           }
         }
       }
